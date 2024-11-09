@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.utils.task_group import TaskGroup
 from airflow.operators.empty import EmptyOperator
@@ -30,7 +30,7 @@ with DAG(
     start_task = EmptyOperator(task_id="Start", dag=dag)
     finish_task = EmptyOperator(task_id="Finish", trigger_rule="none_failed", dag=dag)
 
-    with TaskGroup("datasets") as group:
+    with TaskGroup("upload_datasets") as upload_group:
 
         for file in datasets:
             file_without_extension = file.split(".")[0]
@@ -42,7 +42,8 @@ with DAG(
                     "file_name": file,
                     "table_name": file_without_extension
                 },
+                execution_timeout=timedelta(seconds=60),
                 dag=dag
             )
 
-    start_task >> group >> finish_task
+    start_task >> upload_group >> finish_task
