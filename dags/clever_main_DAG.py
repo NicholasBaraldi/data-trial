@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from airflow import DAG
+from airflow import DAG, Dataset
 from airflow.utils.task_group import TaskGroup
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
@@ -9,6 +9,8 @@ default_args = {
     "owner": "nicholas.baraldi",
     "start_date": datetime(2024, 11, 5),
 }
+
+postgres_data = Dataset("http://localhost:8081/browser/")
 
 datasets = [
     "fmcsa_complaints.csv",
@@ -23,12 +25,11 @@ with DAG(
     dag_id="clever_main_DAG",
     default_args=default_args,
     catchup=False,
-    schedule_interval="20 0 * * *",
+    schedule="20 0 * * *",
     max_active_runs=1
-) as dag:
+):
 
-    start_task = EmptyOperator(task_id="Start", dag=dag)
-    finish_task = EmptyOperator(task_id="Finish", trigger_rule="none_failed", dag=dag)
+    start_task = EmptyOperator(task_id="Start")
 
     with TaskGroup("upload_datasets") as upload_group:
 
@@ -42,8 +43,13 @@ with DAG(
                     "file_name": file,
                     "table_name": file_without_extension
                 },
-                execution_timeout=timedelta(seconds=60),
-                dag=dag
+                execution_timeout=timedelta(seconds=60)
             )
+
+    finish_task = EmptyOperator(
+        task_id="Finish",
+        trigger_rule="none_failed",
+        outlets=postgres_data
+    )
 
     start_task >> upload_group >> finish_task
