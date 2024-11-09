@@ -1,5 +1,5 @@
 import pandas as pd
-from scripts.postgres_helper import upload_overwrite_table
+from scripts.postgres_helper import upload_overwrite_table, run_sql
 
 
 def upload_to_postgres(**kwargs):
@@ -11,3 +11,10 @@ def upload_to_postgres(**kwargs):
     )
 
     upload_overwrite_table(raw_df, table_name)
+
+def transform_data(**kwargs):
+    query_file = kwargs.get("query_file")
+
+    query_path = f"queries/{query_file}"
+
+    run_sql(query_path)
