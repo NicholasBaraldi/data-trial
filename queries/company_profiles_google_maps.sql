@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS staging;
 
-CREATE TABLE staging.company_profiles_google_maps AS
+CREATE TABLE IF NOT EXISTS staging.company_profiles_google_maps AS
 SELECT
     name,
 	phone,
