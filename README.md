@@ -1,6 +1,6 @@
 # Clever Data Engineer Trial Project
 
-For this project, I decided to focus on a more robust architecture by creating an ELT and using Postgres as a data lake with data layers.
+Hello everyone! For this project, I decided to focus on a more robust architecture by creating an ELT and using Postgres as a data lake with data layers.
 
 The main DAG is still [clever_main_DAG.py](dags/clever_main_DAG.py), but now there is a second DAG called [staging.py](dags/staging.py) that, as the name suggests, creates the second data layer, keeping only the tables that will be used for analysis, while also performing some basic transformations. To do this, I created some queries that perform these transformations and finally I performed the analyses in the [data_analysis.ipynb](notebooks/data_analysis.ipynb) notebook.
 
@@ -14,7 +14,25 @@ Data ingestion starts with [clever_main_DAG.py](dags/clever_main_DAG.py), which 
 ### Second step - Data Transformation
 Now, after the data is available in the database, it's time to choose which tables to use and make the basic transformations. For this, I'm using the DAG [staging.py](dags/staging.py) that uses the `run_sql()` function to run the queries that you can find in the `/data-trial/queries/` path.
 The queries create the staging schema and the tables, in addition to making the necessary transformations.
-For this project, I chose the tables `company_profiles_google_maps` and `customer_reviews_google`, and the columns `name`, `phone`, `site`, `business_status`, `category`, `city`, `state`, `rating`, `about`, `verified`, `reviews`, `review_text`, `review_datetime_utc`.
+For this project, I chose the tables
+ - `company_profiles_google_maps`
+ - `customer_reviews_google`
+
+and the columns
+ - `name`
+ - `phone`
+ - `site`
+ - `business_status`
+ - `category`
+ - `city`
+ - `state`
+ - `rating`
+ - `about`
+ - `verified`
+ - `reviews`
+ - `review_text`
+ - `review_datetime_utc`
+
 Validations are mainly to avoid null data that I consider necessary. From the point of view of the end customer who is researching which company to hire, I also considered it necessary for the company to have a telephone number or website, be verified and the status be `"OPERATIONAL"` so that the customer can hire the company without problems.
 
 > Note: this DAG uses an Airflow dataset, so whenever [clever_main_DAG.py](dags/clever_main_DAG.py) finishes this DAG will be triggered. This is good to ensure that even if there is a delay in the first DAG, the second one will not be triggered before time. But it is important to be aware of the following: If you clear any run of the mother DAG, the child DAG will be triggered again. In this case it does not cause any problems but it is good to be aware of this behavior.
@@ -26,4 +44,5 @@ The analyses are better explained in the notebook.
 
 ### The End!
 Thanks for the opportunity, I hope you liked it :smiley:
+
 ![Thats_all_folks](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdm5vamxrNjlneTlzOTlmbWdneW5jZzgwNXIxOWl2aHdndGYwbm5yMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7yojoQtevjOCI/giphy.webp)
