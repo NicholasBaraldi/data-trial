@@ -19,7 +19,6 @@ def run_sql(path: str) -> None:
     """
     with open(path) as f:
         with engine.connect() as conn:
-            LOGGER.info(f"Executing query: {f.read()}")
             conn.execute(text(f.read()))
             conn.close()
 

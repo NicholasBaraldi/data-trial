@@ -7,7 +7,7 @@ SELECT
     site,
     city,
     state,
-    about,
+    about
 FROM
     public.company_profiles_google_maps
 WHERE
