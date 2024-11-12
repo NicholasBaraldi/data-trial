@@ -22,7 +22,7 @@ datasets = [
 ]
 
 with DAG(
-    dag_id="clever_main_DAG",
+    dag_id="ingestion",
     default_args=default_args,
     catchup=False,
     schedule="20 0 * * *",
