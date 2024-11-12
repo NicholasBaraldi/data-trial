@@ -13,7 +13,7 @@ Data ingestion starts with [ingestion.py](dags/ingestion.py), which takes the li
 
 ### Second step - Data Transformation
 Now, after the data is available in the database, it's time to choose which tables to use and make the basic transformations. For this, I'm using the DAG [staging.py](dags/staging.py) that uses the `run_sql()` function to run the queries that you can find in the `/data-trial/queries/` path.
-The queries create the staging schema and the tables, in addition to making the necessary transformations.
+The queries create the staging schema and the tables, in addition to making the necessary transformations.\
 For this project, I chose the tables
  - `company_profiles_google_maps`
  - `customer_reviews_google`
