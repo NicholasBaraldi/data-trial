@@ -2,7 +2,7 @@
 
 Hello everyone! For this project, I decided to focus on a more robust architecture by creating an ELT and using Postgres as a data lake with data layers.
 
-The main DAG is still [ingestion.py](dags/ingestion.py), but now there is a second DAG called [staging.py](dags/staging.py) that, as the name suggests, creates the second data layer, keeping only the tables that will be used for analysis, while also performing some basic transformations. To do this, I created some queries that perform these transformations and finally I performed the analyses in the [data_analysis.ipynb](notebooks/data_analysis.ipynb) notebook.
+The main DAG is [ingestion.py](dags/ingestion.py), but now there is a second DAG called [staging.py](dags/staging.py) that, as the name suggests, creates the second data layer, keeping only the tables that will be used for analysis, while also performing some basic transformations. To do this, I created some queries that perform these transformations and finally I performed the analyses in the [data_analysis.ipynb](notebooks/data_analysis.ipynb) notebook.
 
 ## Architecture
 
