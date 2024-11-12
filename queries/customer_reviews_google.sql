@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS staging.customer_reviews_google AS
 SELECT
     name,
     reviews,
-    rating,
+    review_rating,
     review_text,
     review_datetime_utc::date
 FROM
@@ -12,4 +12,4 @@ FROM
 WHERE
     name IS NOT NULL
     AND reviews IS NOT NULL
-    AND rating IS NOT NULL;
+    AND review_rating IS NOT NULL;
