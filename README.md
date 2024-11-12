@@ -26,7 +26,7 @@ and the columns
  - `category`
  - `city`
  - `state`
- - `rating`
+ - `review_rating`
  - `about`
  - `verified`
  - `reviews`
@@ -39,10 +39,10 @@ Validations are mainly to avoid null data that I consider necessary. From the po
 
 ### Third Step - Data Analysis
 
-With the data already prepared for analysis, I read it in [data_analysis.ipynb](notebooks/data_analysis.ipynb) and make the necessary joins, then I start plotting the graphs using the seaborn library. The analyses are ranking the best-rated companies by city/state, best-rated companies overall, highlighting well-rated companies with accessibility and LGBTQ-friendly, and sentiment analysis using review_text.
-The analyses are better explained in the notebook.
+With the data already prepared for analysis, I read it in [data_analysis.ipynb](notebooks/data_analysis.ipynb), make the necessary joins and start it!\
+The main idea of ​​the analysis is to find the best stores for the end consumer and what makes a store receive more reviews and be better rated.
 
 ### The End!
-Thanks for the opportunity, I hope you liked it :smiley:
+Thanks for the opportunity, I hope you liked this project! :smiley:
 
 ![Thats_all_folks](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdm5vamxrNjlneTlzOTlmbWdneW5jZzgwNXIxOWl2aHdndGYwbm5yMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7yojoQtevjOCI/giphy.webp)
